@@ -5,4 +5,4 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 project(solver_lib)
 
-add_library(solver_lib STATIC solver.cpp)
+add_library(solver_lib STATIC solver.cpp solver.h)
