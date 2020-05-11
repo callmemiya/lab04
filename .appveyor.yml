@@ -10,4 +10,4 @@ build_script:
 - cd solver_application
 - cmake -H. -B_build
 - cmake --build _build
-- cmake --build -build --target solver
+- cmake --build _build --target solver
