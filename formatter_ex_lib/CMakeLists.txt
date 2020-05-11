@@ -6,6 +6,6 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 include_directories(../formatter_lib)
 add_subdirectory(../formatter_lib formatter)
-add_library(formatter_ex STATIC formatter_ex.cpp formatter_ex.h)
+add_library(formatter_ex STATIC formatter_ex.cpp)
 
 target_link_libraries(formatter_ex formatter)
