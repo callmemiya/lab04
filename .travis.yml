@@ -13,6 +13,8 @@ apt:
       - ubuntu-toolchain-r-test
       - llvm-toolchain-precise-3.9
   packages:
+      - cmake
+      - cmake-data
       - clang-3.9
       - g++-7
     
@@ -22,6 +24,7 @@ script:
 - cmake --build _build
 - cmake --build _build --target hello_world
 - ./_build/hello_world
+- echo "Hello_world done"
 - cd ..
 - cd solver_application
 - cmake -H. -B_build
