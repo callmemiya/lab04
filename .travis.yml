@@ -1,14 +1,31 @@
 language: cpp
 
-script:
-- cmake -H. -B_build -DCMAKE_INSTALL_PREFIX=_install
-- cmake --build _build
-- cmake --build _build --target install
+os:
+    - linux
 
+compiler:
+    -gcc
+    -clang
+    
 addons:
-  apt:
-    sources:
-      - george-edison55-precise-backports
-    packages:
-      - cmake
-      - cmake-data
+apt:
+  sources:
+      - ubuntu-toolchain-r-test
+      - llvm-toolchain-precise-3.9
+  packages:
+      - clang-3.9
+      - g++-7
+    
+script:
+- cd hello_world_application
+- cmake -H. -B_build
+- cmake --build _build
+- cmake --build _build --target hello_world
+- ./_build/hello_world
+- cd ..
+- cd solver_application
+- cmake -H. -B_build
+- cmake --build _build
+- cmake --build _build --target solver
+
+
