@@ -5,8 +5,8 @@ set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 add_executable(solver equation.cpp)
-include_directories(../formatter-ex-lib)
+include_directories(../formatter-ex-lib ../solver_lib)
 add_subdirectory(../formatter_ex_lib formatter_ex)
-add_library(solver_lib STATIC ../solver_lib/solver.cpp ../solver_lib/solver.h)
+add_subdirectory(../solver_lib solver_lib)
 target_link_libraries(solver solver_lib formatter_ex)
 
