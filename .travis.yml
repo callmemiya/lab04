@@ -1,8 +1,5 @@
 language: cpp
 
-os:
-    - linux
-
 compiler:
     -gcc
     -clang
@@ -19,16 +16,32 @@ apt:
       - g++-7
     
 script:
-- cd hello_world_application
-- cmake -H. -B_build
-- cmake --build _build
-- cmake --build _build --target hello_world
-- ./_build/hello_world
-- echo "Hello_world done"
-- cd ..
 - cd solver_application
 - cmake -H. -B_build
 - cmake --build _build
 - cmake --build _build --target solver
 
-
+deploy:
+    provider: releases
+    api_key:
+        secure: "bc5W/vVqjbPVr0vTHvhjxTGyiTkNijisXimKs/z/mzIKG6tWf1ayWuxiKDJSN8AT6Kw/RgXKtWSld20SHJGaOhF9+dLwqfkh5Wbcq4Dz+vAL9BOAsgiHwPX9phSagyTjB7Yb4eyGg3cn8IgjWQWIGfGPlCTZi5HUAOgNjmjzMuUqHJunBIEG+RP1ezViEcMSx5gZtOKwMz7Et6fin/IKlFPwb5Ipj0OwQcKZmmQeLFQuA3o48BLELdks2ojWqJzPuIq6i9rGEp73Cky0xp9fv78/vEtQ/KVjIwPdx/z0tMnX41xI1YCoFIy1+SFPXi/Sn3UKtRS4qqOqrxH53OYzP5iSMzzf4rOAoTRZuvRKY+XrhJIdnwBBf79awtAuhR94OoNzOPR2arPtzqql8TtQQ0ayqh+miAckRAeQYDD11EtpXRsnFf5V+hJKx/6UjYM12nYMvTRqXhbxnmdqb10Yl5XTy0rIehWH4OR5H90l7tpyynDFyoXIkZpXibst9YEeD+vm16+AgqWvUW+UGRjZOvjNPi00Fhj1Rncu6HYrpPfzzwbtC58hxwPib0OcAlyQfzmWXFE2kcOTBuBFUEAhg/J5h7iwPsh2gVTchxe9yHqhzieTQT7E2SmVM8/ChwHGuJ0v1TJHrrfRrhsQURHJkQjU/wKuRBlPKkUtFmEXw80="
+        os:osx
+            script:
+            - cpack -G DragNDrop
+            
+        os: linux
+            script:
+            - cpack -G DEB
+            
+        os: linux
+            addons:
+            apt:
+                packages:
+                - rpm
+            script:
+            - cpack -G RPM
+        
+        skip_cleanup: true
+        
+        on:
+            tags: true
